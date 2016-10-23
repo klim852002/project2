@@ -13,6 +13,8 @@ var dotenv = require('dotenv')
 
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
+// to remove once moving env
+mongoose.connect('mongodb://localhost/help-shop');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -53,6 +55,10 @@ app.use(bodyParser.urlencoded({
 
 // require('./config/passport')(passport)
 
+// direct to /index
+app.get('/', function(req, res) {
+  res.render('index');
+});
 app.use('/taskers', taskersRoutes)
 app.use('/helpers', helpersRoutes)
 app.use('/tasks', tasksRoutes)
