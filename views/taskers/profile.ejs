@@ -7,15 +7,7 @@ Taskers profile page
   </div>
 <% } %>
 
-<ul id="all-task-list">
-  <% allTasks.forEach(function(task) { %>
-    // <li>
-    Title:          <%= task.title %><br>
-    Description:    <%= task.description %><br>
-    Date:           <%= task.date %><br>
-    Time:           <%= task.time %><br>
-    Location:       <%= task.location %><br>
-        <hr>
-    // </li>
-  <% }) %>
-  </ul>
+
+  <button type="button" class="btn btn-secondary btn-lg"><a href="/tasks/newtask">Create a task</button>
+
+  <a href="taskers/logout">Logout</a>
