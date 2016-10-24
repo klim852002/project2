@@ -1,1 +1,21 @@
 Taskers profile page
+
+<% if(message.length > 0) { %>
+  <h3>Flash Found</h3>
+  <div class="alert alert-danger">
+    <%= message %>
+  </div>
+<% } %>
+
+<ul id="all-task-list">
+  <% allTasks.forEach(function(task) { %>
+    // <li>
+    Title:          <%= task.title %><br>
+    Description:    <%= task.description %><br>
+    Date:           <%= task.date %><br>
+    Time:           <%= task.time %><br>
+    Location:       <%= task.location %><br>
+        <hr>
+    // </li>
+  <% }) %>
+  </ul>

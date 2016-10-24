@@ -55,6 +55,10 @@ router.get('/logout', function (req, res) {
   req.logout()
   res.redirect('/login')
 })
+
+router.get('/', function (req, res) {
+  res.render('helpers')
+  })
 // get request to render helpers signup page
 // router.get('/signup', function (req, res) {
 //   res.render('helpers/signup')

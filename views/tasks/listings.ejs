@@ -1,12 +1,14 @@
 listings page
 
-<%# <ul id="all-user-list">
-  <% allUsers.forEach(function(user) { %>
-    <li>
-        <%= user.local.name %><br>
-        <%= user.local.email %><br>
-        <%= user.local.password %>
-    </li>
+<ul id="all-task-list">
+  <% allTasks.forEach(function(task) { %>
+    // <li>
+    Title:          <%= task.title %><br>
+    Description:    <%= task.description %><br>
+    Date:           <%= task.date %><br>
+    Time:           <%= task.time %><br>
+    Location:       <%= task.location %><br>
+        <hr>
+    // </li>
   <% }) %>
-  </ul>%>
-  
+  </ul>
