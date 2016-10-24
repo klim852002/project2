@@ -4,37 +4,80 @@ var passport = require('passport')
 
 var Helper = require('../models/helper')
 
-router.get('/signup', function(req, res) {
-  res.render('helpers/signup');
-});
 
-router.post('/signup', function(req, res) {
-  Helper.create(req.body.helper, function (err, helper) {
-    if (err) {
-      res.send('an err during creation' + err)
-    } else {
-      // res.redirect('/helpers')
-      res.send('successful')
-    }
-  })
-    // res.send(req.body)
+function authCheck (req, res, next) {
+  // if req.isAuthenticated is false, then let it be
+
+  // if it's true, redirect back to profile
+  if (req.isAuthenticated()) {
+    req.flash('signupMessage', 'You have logged in')
+    return res.redirect('/profile')
+  } else {
+    return next()
+  }
+}
+// using the local passport strategy for signup
+router.route('/signup')
+      .get(authCheck, function (req, res) {
+        Helper.find({}, function (err, allHelpers) {
+          res.render('helpers/signup', {
+            allHelpers: allHelpers,
+            message: req.flash('signupMessage')
+          })
+        })
+      })
+      .post(passport.authenticate('local-signup', {
+        successRedirect: '/profile',
+        failureRedirect: '/signup',
+        failureFlash: true
+      }))
+// using the local passport strategy for signup
+
+// local passport strategy for authenticating login
+router.route('/login')
+      .get(function (req, res) {
+        res.render('helpers/login', { message: req.flash('loginMessage') })
+      })
+      .post(passport.authenticate('local-login', {
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash: true
+      }))
+// local passport strategy for authenticating login
+
+router.get('/profile', function (req, res) {
+  res.send(req.user)
+
+  res.render('helpers/profile', { message: req.flash('loginMessage') })
 })
-// var newMovie = new Movie({
-//   name: req.body.newmovie.name,
-//   year: req.body.newmovie.year,
-//   rating: 4
-// })
+
+router.get('/logout', function (req, res) {
+  req.logout()
+  res.redirect('/login')
+})
+// get request to render helpers signup page
+// router.get('/signup', function (req, res) {
+//   res.render('helpers/signup')
+// });
 //
-// newMovie.save(function (err) {
-//   if (err) throw new Error(err)
+// router.post('/signup', function(req, res) {
+//   Helper.create(req.body.helper, function (err, helper) {
+//     if (err) {
+//       res.send('an err during creation' + err)
+//     } else {
+//       // res.redirect('/helpers')
+//       // res.send('successful')
+//       res.redirect('/')
+//     }
+//   })
 // })
-// res.send(newMovie)
+// router.get('/login', function (req, res) {
+//   res.render('helpers/login')
 // })
 
-
-router.get('/login', function(req, res) {
-  res.render('helpers/login');
-});
+// }).get('/:id', function (req, res) {
+//   res.send('ROUTES GOES HERE INSTEAD')
+// }).get('/:id/edit', function (req, res) {
 
 
 // ===

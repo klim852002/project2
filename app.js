@@ -14,29 +14,29 @@ var dotenv = require('dotenv')
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 // to remove once moving env
-mongoose.connect('mongodb://localhost/help-shop');
+mongoose.connect('mongodb://localhost/help-shop')
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-// dotenv.load({ path: '.env.' + process.env.NODE_ENV })
+dotenv.load({ path: '.env.' + process.env.NODE_ENV })
 //
 // mongoose.connect(process.env.MONGO_URI)
 app.use(morgan('dev'))
 app.set('view engine', 'ejs')
 app.use(layout)
-// app.use(session({
-//   secret: process.env.EXPRESS_SECRET,
-//   resave: true,
-//   saveUninitialized: true,
-//   store: new MongoStore({
-//     url: process.env.MONGO_URI,
-//     autoReconnect: true
-//   })
-// }))
+app.use(session({
+  secret: process.env.EXPRESS_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    url: process.env.MONGO_URI,
+    autoReconnect: true
+  })
+}))
 
-// app.use(passport.initialize())
-// app.use(passport.session())
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(flash())
 
@@ -53,16 +53,16 @@ app.use(bodyParser.urlencoded({
   extended: true
 })) // to parse form submitted data
 
-// require('./config/passport')(passport)
+require('./config/passport')(passport)
 
 // direct to /index
-app.get('/', function(req, res) {
-  res.render('index');
+app.get('/', function (req, res) {
+  res.render('index')
 });
 app.use('/taskers', taskersRoutes)
 app.use('/helpers', helpersRoutes)
 app.use('/tasks', tasksRoutes)
 
-// app.listen(process.env.PORT || 3000)
-app.listen(4000)
+app.listen(process.env.PORT || 4000)
+// app.listen(4000)
 console.log('Server started')

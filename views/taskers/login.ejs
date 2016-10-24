@@ -1,14 +1,17 @@
 TASKERS - LOGIN
 
-<form class="tasker-login" action="/login" method = "post">
+<form class="tasker-login" action="/taskers/login" method = "post">
+
   <div class="form-group">
-    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+    <label class="sr-only">Email address</label>
+    <input type="email" name=tasker[email] class="form-control" id="tasker-email" placeholder="Email">
   </div>
+
   <div class="form-group">
-    <label class="sr-only" for="exampleInputPassword3">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+    <label class="sr-only">Password</label>
+    <input type="password" name=tasker[password] class="form-control" id="tasker-password" placeholder="Password">
   </div>
+
   <div class="checkbox">
     <label>
       <input type="checkbox"> Remember me

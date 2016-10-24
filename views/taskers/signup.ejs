@@ -1,14 +1,28 @@
 TASKERS- SIGNUP
 
-<form class="tasker-signup" action="/signup" method = "post">
-  <div class="form-group">
-    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+<% if(message.length > 0) { %>
+  <h3>Flash Found</h3>
+  <div class="alert alert-danger">
+    <%= message %>
   </div>
+<% } %>
+
+<form class="tasker-signup" action="/taskers/signup" method = "post">
   <div class="form-group">
-    <label class="sr-only" for="exampleInputPassword3">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+    <label class="sr-only">Name</label>
+    <input type="text" name=tasker[local][name] class="form-control" id="tasker-name" placeholder="Name">
   </div>
+
+  <div class="form-group">
+    <label class="sr-only">Email address</label>
+    <input type="email" name=tasker[local][email] class="form-control" id="tasker-email" placeholder="Email">
+  </div>
+
+  <div class="form-group">
+    <label class="sr-only">Password</label>
+    <input type="password" name=tasker[local][password] class="form-control" id="tasker-password" placeholder="Password">
+  </div>
+
   <div class="checkbox">
     <label>
       <input type="checkbox"> Remember me
