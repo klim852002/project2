@@ -9,7 +9,7 @@ function authCheck (req, res, next) {
   // if it's true, redirect back to profile
   if (req.isAuthenticated()) {
     req.flash('signupMessage', 'You have logged in')
-    return res.redirect('/profile')
+    return res.redirect('/helpers/profile')
   } else {
     return next()
   }
@@ -24,7 +24,7 @@ router.route('/signup')
           })
         })
       })
-      .post(passport.authenticate('local-signup', {
+      .post(passport.authenticate('helper-signup', {
         successRedirect: '/helpers/profile',
         failureRedirect: '/helpers/signup',
         failureFlash: true
@@ -36,7 +36,7 @@ router.route('/login')
       .get(function (req, res) {
         res.render('helpers/login', { message: req.flash('loginMessage') })
       })
-      .post(passport.authenticate('local-login', {
+      .post(passport.authenticate('helper-login', {
         successRedirect: '/helpers/profile',
         failureRedirect: '/helpers/login',
         failureFlash: true

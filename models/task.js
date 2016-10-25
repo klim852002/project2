@@ -6,12 +6,12 @@ var taskSchema = new mongoose.Schema({
     date: Date,
     time: String,
     location: String,
-    helper:{
+    tasker: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Helper' },
-    tasker:{
+      ref: 'Tasker' },
+    helper: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Tasker' }
+      ref: 'Helper' }
 })
 
 var Task = mongoose.model('Task', taskSchema)

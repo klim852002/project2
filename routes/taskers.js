@@ -26,7 +26,7 @@ router.route('/signup')
       })
       .post(passport.authenticate('local-signup', {
         successRedirect: '/taskers/profile',
-        failureRedirect: '/taskers/signup',
+        failureRedirect: '/test',
         failureFlash: true
       }))
 // using the local passport strategy for signup
@@ -38,7 +38,7 @@ router.route('/login')
       })
       .post(passport.authenticate('local-login', {
         successRedirect: '/taskers/profile',
-        failureRedirect: '/taskers/login',
+        failureRedirect: '/test2',
         failureFlash: true
       }))
 // local passport strategy for authenticating login
