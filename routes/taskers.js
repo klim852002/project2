@@ -68,7 +68,18 @@ router.get('/profile', isLoggedIn, function (req, res) {
   // res.render('taskers/profile', { message: req.flash('loginMessage') })
 })
 
-// router.get('/profile/:id/')
+router.get('/profile/:id', function (req, res) {
+  Task.findOne({_id: req.params.id}, function(err, selectedTask) {
+    res.render('tasks/edit', {
+      selectedTask: selectedTask,
+    })
+  })
+})
+// put/post request to edit task
+// router.
+
+// delete request to remove task
+
 
 router.get('/logout', function (req, res) {
   req.logout()

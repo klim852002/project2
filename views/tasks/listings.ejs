@@ -1,15 +1,12 @@
-listings page
+<h1>listings page</h1>
 
 <ul id="all-task-list">
   <% allTasks.forEach(function(task) { %>
-    // <li>
     Title:          <%= task.title %><br>
     Description:    <%= task.description %><br>
     Date:           <%= task.date %><br>
     Time:           <%= task.time %><br>
     Location:       <%= task.location %><br>
-    Posted by:      <%= req.user.id %><br>
         <hr>
-    // </li>
   <% }) %>
   </ul>

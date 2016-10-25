@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 var morgan = require('morgan')
 var flash = require('connect-flash')
 var session = require('express-session')
-
+var override = require ('method-override')
 var passport = require('passport')
 var MongoStore = require('connect-mongo')(session)
 

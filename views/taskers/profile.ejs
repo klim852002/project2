@@ -5,7 +5,7 @@ Taskers profile page
 <h2>Your task listing</h2>
 <% taskList.forEach(function(task) { %>
       <tr>
-        <td><%= task.title %></td>
+        <td><a href="profile/<%=task._id%>"<%= task.title %></td>
         <td><%= task.description %></td>
         <td><%= task.date %></td>
         <td><%= task.time %></td>
