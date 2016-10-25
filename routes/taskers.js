@@ -3,6 +3,7 @@ var router = express.Router()
 var passport = require('passport')
 
 var Tasker = require('../models/tasker')
+var Task = require('../models/task')
 function authCheck (req, res, next) {
   // if req.isAuthenticated is false, then let it be
 
@@ -14,6 +15,15 @@ function authCheck (req, res, next) {
     return next()
   }
 }
+
+function isLoggedIn (req, res, next) {
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated())
+    return next()
+  // otherwise redirect them to the home page
+  res.redirect('/')
+}
+
 // using the local passport strategy for signup
 router.route('/signup')
       .get(authCheck, function (req, res) {
@@ -43,13 +53,22 @@ router.route('/login')
       }))
 // local passport strategy for authenticating login
 
-router.get('/profile', function (req, res) {
+router.get('/profile', isLoggedIn, function (req, res) {
+  Task.find({'tasker': req.user}, function (err, taskList) {
+    res.render('taskers/profile', {
+      taskList: taskList,
+      user: req.user.local.name
+    })
+  })
+  // .populate()
   // this return in json format
   // res.send(req.user)
   // need to search user by id
   // Tasker.find({}, req.body._id)
-  res.render('taskers/profile', { message: req.flash('loginMessage') })
+  // res.render('taskers/profile', { message: req.flash('loginMessage') })
 })
+
+// router.get('/profile/:id/')
 
 router.get('/logout', function (req, res) {
   req.logout()
