@@ -9,8 +9,28 @@ var taskerSchema = new mongoose.Schema({
   }
 })
 
-taskerSchema.statics.encrypt = function (password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null)
+taskerSchema.pre('save', function (next) {
+  var tasker = this
+  bcrypt.genSalt(function (err, salt) {
+    if (err) return next(err)
+
+    bcrypt.hash(tasker.local.password, salt, function (err, hash) {
+      if (err) return next(err)
+
+      tasker.local.password = hash
+      next()
+    })
+  })
+})
+
+taskerSchema.methods.auth = function (givenPassword, callback) {
+  console.log('given password is ' + givenPassword)
+  console.log('saved password is ' + this.local.password)
+  var hashedPassword = this.local.password
+
+  bcrypt.compare(givenPassword, hashedPassword, function (err, isMatch) {
+    callback(err, isMatch)
+  })
 }
 
 var Tasker = mongoose.model('Tasker', taskerSchema)

@@ -3,8 +3,6 @@ var router = express.Router()
 var passport = require('passport')
 
 var Helper = require('../models/helper')
-
-
 function authCheck (req, res, next) {
   // if req.isAuthenticated is false, then let it be
 
@@ -27,8 +25,8 @@ router.route('/signup')
         })
       })
       .post(passport.authenticate('local-signup', {
-        successRedirect: '/profile',
-        failureRedirect: '/signup',
+        successRedirect: '/helpers/profile',
+        failureRedirect: '/helpers/signup',
         failureFlash: true
       }))
 // using the local passport strategy for signup
@@ -39,21 +37,21 @@ router.route('/login')
         res.render('helpers/login', { message: req.flash('loginMessage') })
       })
       .post(passport.authenticate('local-login', {
-        successRedirect: '/profile',
-        failureRedirect: '/login',
+        successRedirect: '/helpers/profile',
+        failureRedirect: '/helpers/login',
         failureFlash: true
       }))
 // local passport strategy for authenticating login
 
 router.get('/profile', function (req, res) {
-  res.send(req.user)
+  // res.send(req.user)
 
   res.render('helpers/profile', { message: req.flash('loginMessage') })
 })
 
 router.get('/logout', function (req, res) {
   req.logout()
-  res.redirect('/login')
+  res.redirect('/')
 })
 
 router.get('/', function (req, res) {

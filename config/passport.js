@@ -1,7 +1,7 @@
 var LocalStrategy = require('passport-local').Strategy
 
 var Tasker = require('../models/tasker')
-
+// for sessions
 module.exports = function (passport) {
   passport.serializeUser(function (tasker, done) {
     done(null, tasker.id)
@@ -9,9 +9,15 @@ module.exports = function (passport) {
 
   passport.deserializeUser(function (id, done) {
     Tasker.findById(id, function (err, tasker) {
-      done(err, tasker)
-    })
-  })
+     if(tasker) {
+       done(err, tasker)
+     } else {
+       Helper.findById(id, function (err, helper) {
+         done(err, helper)
+       })
+     }
+   })
+ })
 // passport declaring the signup strategy to use taking 2 arguments, name and strategy
   passport.use('local-signup', new LocalStrategy({
     usernameField: 'tasker[local][email]',
@@ -54,7 +60,34 @@ module.exports = function (passport) {
     // if cannot find use by email, return to route with flash message
     if (!foundTasker)
       return next(null, false, req.flash('loginMessage', 'No user found with this email'))
+      console.log(foundTasker)
+      foundTasker.auth(password, function (err, authenticated) {
+        if (err) return next(err)
 
+        if (authenticated) {
+          return next(null, foundTasker, req.flash('loginMessage', 'Hello logged in user ' + foundTasker.local.name))
+        } else {
+          return next(null, false, req.flash('loginMessage', 'Password don\'t match'))
+        }
+      })
+    })
+  }))
+// below this is authentication for helper
+  passport.use('local-login', new LocalStrategy({
+    usernameField: 'tasker[local][email]',
+    passwordField: 'tasker[local][password]',
+    passReqToCallback: true
+  }, function (req, email, password, next) {
+    console.log('authenticating with given email and password')
+    console.log(email, password)
+
+    Tasker.findOne({ 'local.email': email }, function (err, foundTasker) {
+      if (err) return next(err)
+
+    // if cannot find use by email, return to route with flash message
+    if (!foundTasker)
+      return next(null, false, req.flash('loginMessage', 'No user found with this email'))
+      console.log(foundTasker)
       foundTasker.auth(password, function (err, authenticated) {
         if (err) return next(err)
 

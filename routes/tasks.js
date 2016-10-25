@@ -15,12 +15,11 @@ router.post('/newtask', function (req, res) {
       res.send('an err during creation' + err)
     } else {
       // res.redirect('/profile')
-        res.send('successful')
-        // res.redirect('/')
+        // res.send('successful')
+        res.redirect('/taskers/profile')
     }
   })
 })
-
 // get request to render all Task listings
 router.get('/listings', function (req, res) {
   Task.find({}, function (err, allTasks) {

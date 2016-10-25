@@ -38,7 +38,7 @@ router.route('/login')
       })
       .post(passport.authenticate('local-login', {
         successRedirect: '/taskers/profile',
-        failureRedirect: '/test',
+        failureRedirect: '/taskers/login',
         failureFlash: true
       }))
 // local passport strategy for authenticating login
@@ -47,17 +47,17 @@ router.get('/profile', function (req, res) {
   // this return in json format
   // res.send(req.user)
   // need to search user by id
-  // Tasker.find({}, )
+  // Tasker.find({}, req.body._id)
   res.render('taskers/profile', { message: req.flash('loginMessage') })
 })
 
 router.get('/logout', function (req, res) {
   req.logout()
-  res.redirect('taskers/login')
+  res.redirect('/')
 })
 
 router.get('/', function (req, res) {
   res.render('taskers/index')
-  })
+})
 
 module.exports = router
