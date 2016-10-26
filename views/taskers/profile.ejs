@@ -11,7 +11,8 @@ Taskers profile page
         <td><%= task.date %></td>
         <td><%= task.time %></td>
         <a href="profile/<%=task._id%>/edit">Amend</a>
-        <a href="profile/<%=task._id%>/delete">Delete</a>
+        <td><form method="post" action="profile/<%=task._id%>?_method=DELETE">
+        <button class="btn btn-danger btn-sm" name="submit" type="submit">Delete</button>
       </tr><hr>
       <% })  %>
 

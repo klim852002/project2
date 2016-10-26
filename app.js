@@ -5,9 +5,9 @@ var bodyParser = require('body-parser')
 var morgan = require('morgan')
 var flash = require('connect-flash')
 var session = require('express-session')
-var override = require ('method-override')
 var passport = require('passport')
 var MongoStore = require('connect-mongo')(session)
+var methodOverride = require('method-override')
 
 var dotenv = require('dotenv')
 
@@ -47,12 +47,13 @@ var taskersRoutes = require('./routes/taskers'
 )
 var helpersRoutes = require('./routes/helpers')
 var tasksRoutes = require('./routes/tasks')
+// var taskersAPIRoutes = require('./routes/taskers_api')
 
 app.use(bodyParser.json()) // to parse ajax json req
 app.use(bodyParser.urlencoded({
   extended: true
 })) // to parse form submitted data
-
+app.use(methodOverride('_method'))
 require('./config/passport')(passport)
 
 // direct to /index
@@ -62,6 +63,7 @@ app.get('/', function (req, res) {
 app.use('/taskers', taskersRoutes)
 app.use('/helpers', helpersRoutes)
 app.use('/tasks', tasksRoutes)
+// app.use('/taskers/taskers_api', taskersAPIRoutes)
 
 app.listen(process.env.PORT || 4000)
 // app.listen(4000)

@@ -96,25 +96,23 @@ router.post('/profile/:id/edit', function (req, res) {
   })
 })
 
-router.get('/profile/:id/delete', function (req, res) {
+router.get('/profile/:id', function (req, res) {
   Task.findOne({_id: req.params.id}, function(err, deleteTask) {
     res.render('tasks/delete', {
       deleteTask: deleteTask
     })
   })
 })
-
-router.delete('profile/:id/delete', function (req, res){
-  Task.findOne({_id: req.params.id}, function (err, deleteTask){
+// delete request to remove task
+router.delete('/profile/:id', function (req, res){
+  Task.findOneAndRemove({_id: req.params.id}, function (err, deleteTask){
     if (err) {
-      res.render('tasks/delete')
+      res.render('tasks/edit')
     } else {
       res.redirect('/taskers/profile')
     }
   })
 })
-// delete request to remove task
-// router.delete('')
 
 // tasker log out request
 router.get('/logout', function (req, res) {
