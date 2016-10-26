@@ -52,17 +52,23 @@ router.get('/helperlist', function (req, res) {
 
 router.get('/:id/message', function (req, res) {
   Task.findOne({_id: req.params.id}, function(err, viewTask) {
-    console.log(viewTask)
-    if (err) {
-      console.log(err)
-    } else {
-      res.send('hi')
-      // res.render('message')
-      // viewTask: viewTask
-    }
+      res.render('tasks/message', {
+          viewTask: viewTask
+      })
   })
 })
-
+// below is stable for individual task comment.
+// router.get('/:id/message', function (req, res) {
+//   Task.findOne({_id: req.params.id}, function(err, viewTask) {
+//     if (err) {
+//       console.log(err)
+//     } else {
+//       // res.render('tasks/message')
+//       // viewTask: viewTask
+//       res.send('hi')
+//     }
+//   })
+// })
 
 // router.get('/profile/:id/edit', function (req, res) {
 //   Task.findOne({_id: req.params.id}, function(err, selectedTask) {

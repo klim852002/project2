@@ -60,6 +60,10 @@ require('./config/passport')(passport)
 app.get('/', function (req, res) {
   res.render('index')
 });
+
+app.get('/about', function (req, res) {
+  res.render('aboutus')
+})
 app.use('/taskers', taskersRoutes)
 app.use('/helpers', helpersRoutes)
 app.use('/tasks', tasksRoutes)
