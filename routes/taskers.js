@@ -36,7 +36,7 @@ router.route('/signup')
       })
       .post(passport.authenticate('local-signup', {
         successRedirect: '/taskers/profile',
-        failureRedirect: '/test',
+        failureRedirect: '/taskers/signup',
         failureFlash: true
       }))
 // using the local passport strategy for signup
@@ -48,7 +48,7 @@ router.route('/login')
       })
       .post(passport.authenticate('local-login', {
         successRedirect: '/taskers/profile',
-        failureRedirect: '/test2',
+        failureRedirect: '/taskers/login',
         failureFlash: true
       }))
 // local passport strategy for authenticating login
@@ -68,26 +68,62 @@ router.get('/profile', isLoggedIn, function (req, res) {
   // res.render('taskers/profile', { message: req.flash('loginMessage') })
 })
 
-router.get('/profile/:id', function (req, res) {
+// get request for a submitted form
+router.get('/profile/:id/edit', function (req, res) {
   Task.findOne({_id: req.params.id}, function(err, selectedTask) {
     res.render('tasks/edit', {
-      selectedTask: selectedTask,
+      selectedTask: selectedTask
     })
   })
 })
-// put/post request to edit task
-// router.
 
+// post request for a amended task
+router.post('/profile/:id/edit', function (req, res) {
+  // res.send('test')
+  Task.findOne({_id: req.params.id}, function (err, amendTask) {
+    if (err) {
+      res.render('tasks/edit')
+    } else {
+      amendTask.title = req.body.task.title
+      amendTask.description = req.body.task.description
+      amendTask.date = req.body.task.date
+      amendTask.time = req.body.task.time
+      amendTask.location = req.body.task.location
+      amendTask.save(function (err, amendedTask) {
+        res.redirect('/taskers/profile')
+      })
+    }
+  })
+})
+
+router.get('/profile/:id/delete', function (req, res) {
+  Task.findOne({_id: req.params.id}, function(err, deleteTask) {
+    res.render('tasks/delete', {
+      deleteTask: deleteTask
+    })
+  })
+})
+
+router.delete('profile/:id/delete', function (req, res){
+  Task.findOne({_id: req.params.id}, function (err, deleteTask){
+    if (err) {
+      res.render('tasks/delete')
+    } else {
+      res.redirect('/taskers/profile')
+    }
+  })
+})
 // delete request to remove task
+// router.delete('')
 
-
+// tasker log out request
 router.get('/logout', function (req, res) {
   req.logout()
   res.redirect('/')
 })
 
 router.get('/', function (req, res) {
-  res.render('taskers/index')
+  res.render('/')
 })
 
 module.exports = router

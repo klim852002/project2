@@ -3,16 +3,25 @@ var router = express.Router()
 var passport = require('passport')
 
 var Helper = require('../models/helper')
+var Task = require('../models/task')
 function authCheck (req, res, next) {
   // if req.isAuthenticated is false, then let it be
 
   // if it's true, redirect back to profile
   if (req.isAuthenticated()) {
     req.flash('signupMessage', 'You have logged in')
-    return res.redirect('/helpers/profile')
+    return res.redirect('/profile')
   } else {
     return next()
   }
+}
+
+function isLoggedIn (req, res, next) {
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated())
+    return next()
+  // otherwise redirect them to the home page
+  res.redirect('/')
 }
 // using the local passport strategy for signup
 router.route('/signup')
@@ -55,7 +64,7 @@ router.get('/logout', function (req, res) {
 })
 
 router.get('/', function (req, res) {
-  res.render('helpers')
+  res.render('/')
   })
 // get request to render helpers signup page
 // router.get('/signup', function (req, res) {
