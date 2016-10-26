@@ -47,7 +47,7 @@ var taskersRoutes = require('./routes/taskers'
 )
 var helpersRoutes = require('./routes/helpers')
 var tasksRoutes = require('./routes/tasks')
-// var taskersAPIRoutes = require('./routes/taskers_api')
+var taskersAPIRoutes = require('./routes/taskers_api')
 
 app.use(bodyParser.json()) // to parse ajax json req
 app.use(bodyParser.urlencoded({
@@ -63,7 +63,7 @@ app.get('/', function (req, res) {
 app.use('/taskers', taskersRoutes)
 app.use('/helpers', helpersRoutes)
 app.use('/tasks', tasksRoutes)
-// app.use('/taskers/taskers_api', taskersAPIRoutes)
+// app.use('/taskers_api', taskersAPIRoutes)
 
 app.listen(process.env.PORT || 4000)
 // app.listen(4000)

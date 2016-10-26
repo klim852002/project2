@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>message</title>
+  </head>
+  <body>
+
+    <h1>Open Tasklist</h1>
+
+    <ul id="all-task-list">
+      <% allTasks.forEach(function(task) { %>
+        Title:          <%= task.title %><br>
+        Description:    <%= task.description %><br>
+        Date:           <%= task.date %><br>
+        Time:           <%= task.time %><br>
+        Location:       <%= task.location %><br>
+        <td><a href="<%=task._id%>/message" class="btn btn-info" role="button" aria-pressed="true">Drop a message!</a></td>
+            <hr>
+      <% }) %>
+      </ul>
+
+
+  </body>
+</html>

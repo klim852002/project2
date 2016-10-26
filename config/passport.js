@@ -11,14 +11,14 @@ module.exports = function (passport) {
   passport.deserializeUser(function (id, done) {
     Tasker.findById(id, function (err, tasker) {
       done(err, tasker)
-    //  if(tasker) {
-    //  } else {
-    //    Helper.findById(id, function (err, helper) {
-    //      done(err, helper)
-    //    })
-    //  }
-   })
- })
+      if (tasker) {
+      } else {
+        Helper.findById(id, function (err, helper) {
+          done(err, helper)
+        })
+      }
+    })
+  })
 // passport declaring the signup strategy for tasker taking 2 arguments, name and strategy
   passport.use('local-signup', new LocalStrategy({
     usernameField: 'tasker[local][email]',

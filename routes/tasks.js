@@ -41,4 +41,35 @@ router.get('/listings', function (req, res) {
   })
 })
 
+router.get('/helperlist', function (req, res) {
+  Task.find({}, function (err, allTasks) {
+    console.log(allTasks)
+    res.render('tasks/helperlist', {
+      allTasks: allTasks
+    })
+  })
+})
+
+router.get('/:id/message', function (req, res) {
+  Task.findOne({_id: req.params.id}, function(err, viewTask) {
+    console.log(viewTask)
+    if (err) {
+      console.log(err)
+    } else {
+      res.send('hi')
+      // res.render('message')
+      // viewTask: viewTask
+    }
+  })
+})
+
+
+// router.get('/profile/:id/edit', function (req, res) {
+//   Task.findOne({_id: req.params.id}, function(err, selectedTask) {
+//     res.render('tasks/edit', {
+//       selectedTask: selectedTask
+//     })
+//   })
+// })
+
 module.exports = router

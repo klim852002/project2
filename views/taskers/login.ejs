@@ -1,21 +1,32 @@
 TASKERS - LOGIN
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
 
-<form class="tasker-login" action="/taskers/login" method = "post">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-  <div class="form-group">
-    <label class="sr-only">Email address</label>
-    <input type="email" name="tasker[local][email]" class="form-control" id="tasker-email" placeholder="Email">
-  </div>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
 
-  <div class="form-group">
-    <label class="sr-only">Password</label>
-    <input type="password" name="tasker[local][password]" class="form-control" id="tasker-password" placeholder="Password">
-  </div>
+  <body>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Remember me
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
-</form>
+    <form class="tasker-login" action="/taskers/login" method = "post">
+
+      <div class="form-group">
+        <label class="sr-only">Email address</label>
+        <input type="email" name="tasker[local][email]" class="form-control" id="tasker-email" placeholder="Email">
+      </div>
+
+      <div class="form-group">
+        <label class="sr-only">Password</label>
+        <input type="password" name="tasker[local][password]" class="form-control" id="tasker-password" placeholder="Password">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+
+  </body>
+</html>
