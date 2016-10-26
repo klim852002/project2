@@ -14,7 +14,7 @@ var dotenv = require('dotenv')
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 // to remove once moving env
-mongoose.connect('mongodb://localhost/help-shop')
+// mongoose.connect('mongodb://localhost/help-shop')
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
