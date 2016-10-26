@@ -52,7 +52,7 @@ router.route('/login')
       }))
 // local passport strategy for authenticating login
 
-router.get('/profile', function (req, res) {
+router.get('/profile', isLoggedIn, function (req, res) {
   // res.send(req.user)
 
   res.render('helpers/profile', { message: req.flash('loginMessage') })
