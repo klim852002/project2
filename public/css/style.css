@@ -9,3 +9,9 @@ h1 {
 h2 {
   rgb(50, 42, 1)
 }
+
+#logoutbtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
