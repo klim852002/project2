@@ -52,20 +52,21 @@ router.route('/login')
       }))
 // local passport strategy for authenticating login
 
-router.get('/profile', isLoggedIn, function (req, res) {
+router.get('/profile', function (req, res) {
   // res.send(req.user)
 
-  res.render('helpers/profile', { message: req.flash('loginMessage') })
+  res.render('helpers/profile')
 })
+// , { message: req.flash('loginMessage') }
 
 router.get('/logout', function (req, res) {
   req.logout()
   res.redirect('/')
 })
 
-router.get('/', function (req, res) {
-  res.render('/')
-})
+// router.get('/', function (req, res) {
+//   res.render('/')
+// })
 // get request to render helpers signup page
 // router.get('/signup', function (req, res) {
 //   res.render('helpers/signup')

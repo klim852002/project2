@@ -11,7 +11,8 @@ var taskSchema = new mongoose.Schema({
       ref: 'Tasker' },
     helper: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Helper' }
+      ref: 'Helper' },
+    message: String
 })
 
 var Task = mongoose.model('Task', taskSchema)

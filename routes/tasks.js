@@ -3,6 +3,7 @@ var router = express.Router()
 
 var Task = require('../models/task')
 var Tasker = require('../models/tasker')
+var Helper = require('../models/helper')
 
 // get request to render form for new task
 router.get('/newtask', function (req, res) {
@@ -55,6 +56,22 @@ router.get('/:id/message', function (req, res) {
       res.render('tasks/message', {
           viewTask: viewTask
       })
+  })
+})
+
+router.post('/:id/message', function (req, res) {
+  Task.findOne ({_id: req.params.id}, function (err, leaveMsg)
+  {
+    if (err) {
+      res.send('cannot leave message')
+    } else {
+        // console.log(user)
+        leaveMsg.helper=req.user.id
+        leaveMsg.message=req.body.task.message
+        leaveMsg.save(function (err, leaveMsg) {
+          res.redirect('/helpers/profile')
+        })
+      }
   })
 })
 // below is stable for individual task comment.

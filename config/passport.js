@@ -10,8 +10,8 @@ module.exports = function (passport) {
 
   passport.deserializeUser(function (id, done) {
     Tasker.findById(id, function (err, tasker) {
-      done(err, tasker)
       if (tasker) {
+        done(err, tasker)
       } else {
         Helper.findById(id, function (err, helper) {
           done(err, helper)
