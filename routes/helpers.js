@@ -53,9 +53,12 @@ router.route('/login')
 // local passport strategy for authenticating login
 
 router.get('/profile', function (req, res) {
-  // res.send(req.user)
-
-  res.render('helpers/profile')
+  Task.find({'helper': req.user}, function (err, taskList) {
+    res.render('helpers/profile', {
+      taskList: taskList,
+      user: req.user.local.name
+    })
+  })
 })
 // , { message: req.flash('loginMessage') }
 

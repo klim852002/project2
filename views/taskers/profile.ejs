@@ -21,15 +21,25 @@
           <th>Title</th>
           <th>Date</th>
           <th>Time</th>
+          <th>Message</th>
+          <th>Helper</th>
         </tr>
       </thead>
       <tbody>
+
+        <%# var showDate = task.date.slice(10, 5)%>
 
         <% taskList.forEach(function(task) { %>
               <tr>
                 <td><%= task.title %></td>
                 <td><%= task.date%></td>
-                <td><%= task.time %></td>
+                <td><%= task.time%></td>
+                <td><%= task.message%></td>
+                  <td>
+                <% if(task.helper) { %>
+                  <%= task.helper.local.name %></td>
+                <% } else { %>
+                <% } %>
                 <td><a href="profile/<%=task._id%>/edit" class="btn btn-info" role="button" aria-pressed="true">Amend</a></td>
 
                 <td><form method="post" action="profile/<%=task._id%>?_method=DELETE">

@@ -13,8 +13,35 @@ Helpers profile page
       <span class="glyphicon glyphicon-log-out"></span>
       </button>
 
-        <a href="/tasks/helperlist">Check out open tasks</a>
+    <h1>Hi, <%= user %> </h1>
 
+    <table class="table">
+      <thead class="thead-default">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Message</th>
+          <th>Tasker</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% taskList.forEach(function(task) { %>
+              <tr>
+                <td><%= task.title %></td>
+                <td><%= task.description %></td>
+                <td><%= task.date%></td>
+                <td><%= task.time%></td>
+                <td><%= task.message %></td>
+                <td><%= task.tasker %></td>
+              </tr>
+              <% })  %>
+      </tbody>
+    </table>
+
+      <button type="button" class="btn btn-secondary btn-lg"><a href="/tasks/helperList">Check Out Open Tasks</button>
 
     </body>
   </html>

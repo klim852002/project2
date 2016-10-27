@@ -33,7 +33,6 @@ helperSchema.methods.auth = function (givenPassword, callback) {
   })
 }
 
-
 var Helper = mongoose.model('Helper', helperSchema)
 
 module.exports = Helper

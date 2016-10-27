@@ -54,11 +54,16 @@ router.route('/login')
 // local passport strategy for authenticating login
 
 router.get('/profile', isLoggedIn, function (req, res) {
-  Task.find({'tasker': req.user}, function (err, taskList) {
+  Task.find({tasker: req.user.id}).populate('helper').exec(function (err, taskList) {
+    if (err) console.log (err)
+
+    //res.send(taskList)
     res.render('taskers/profile', {
       taskList: taskList,
       user: req.user.local.name
+      // date: req.body.local.task.date.slice(10, 5)
     })
+          // console.log(taskList)
   })
   // .populate()
   // this return in json format
@@ -67,6 +72,8 @@ router.get('/profile', isLoggedIn, function (req, res) {
   // Tasker.find({}, req.body._id)
   // res.render('taskers/profile', { message: req.flash('loginMessage') })
 })
+
+
 
 // get request for a submitted form
 router.get('/profile/:id/edit', function (req, res) {
