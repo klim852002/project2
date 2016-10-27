@@ -1,17 +1,39 @@
-<h1>listings page</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>listings page</h1>
 
-<ul id="all-task-list">
-  <% allTasks.forEach(function(task) { %>
-    <%var date = new Date(task.date);
-        var day = date.getDate();
-        var mth = date.getMonth()+1
-        var yr = date.getFullYear()
-        %>
-    Title:          <%= task.title %><br>
-    Description:    <%= task.description %><br>
-    Date:           <%= day+'/'+mth+ '/'+yr %><br>
-    Time:           <%= task.time %><br>
-    Location:       <%= task.location %><br>
-        <hr>
-  <% }) %>
-  </ul>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>location</th>
+        </tr>
+      </thead>
+      <tbody>
+
+    <ul id="all-task-list">
+      <% allTasks.forEach(function(task) { %>
+        <%var date = new Date(task.date);
+            var day = date.getDate();
+            var mth = date.getMonth()+1
+            var yr = date.getFullYear()
+            %>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= task.description %></td>
+          <td><%= day+'/'+mth+ '/'+yr %></td>
+          <td><%= task.time %></td>
+          <td><%= task.location %></td>
+        </tr>
+      <% }) %>
+      </ul>
+  </body>
+</html>

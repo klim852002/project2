@@ -6,7 +6,23 @@
   </head>
   <body>
 
+    <button type="button" id="logoutbtn" class="btn btn-default btn-sm"><a href="/logout">Logout</a>
+    <span class="glyphicon glyphicon-log-out"></span>
+    </button>
+
     <h1>Open Tasklist</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>location</th>
+        </tr>
+      </thead>
+      <tbody>
 
     <ul id="all-task-list">
       <% allTasks.forEach(function(task) { %>
@@ -15,13 +31,15 @@
             var mth = date.getMonth()+1
             var yr = date.getFullYear()
             %>
-        Title:          <%= task.title %><br>
-        Description:    <%= task.description %><br>
-        Date:           <%= day+'/'+mth+ '/'+yr %><br>
-        Time:           <%= task.time %><br>
-        Location:       <%= task.location %><br>
-        <td><a href="<%=task._id%>/message" class="btn btn-info" role="button" aria-pressed="true">Drop a message!</a></td>
-            <hr>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= task.description %></td>
+          <td><%= day+'/'+mth+ '/'+yr %></td>
+          <td><%= task.time %></td>
+          <td>  <%= task.location %></td>
+          <td><a href="<%=task._id%>/message" class="btn btn-info" role="button" aria-pressed="true">Drop a message!</a></td>
+
+        </tr>
       <% }) %>
       </ul>
 

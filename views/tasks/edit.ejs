@@ -1,32 +1,48 @@
-<h2>Hi, <%= selectedTask.tasker %> </h2>
-<h2>Listed Tasks</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <button type="button" id="logoutbtn" class="btn btn-default btn-sm"><a href="/logout">Logout</a>
+    <span class="glyphicon glyphicon-log-out"></span>
+    </button>
 
-<form class="newtask" id="editEvent" action="#" method = "post">
+    <h2>Hi, <%= selectedTask.tasker %> </h2>
+    <h2>Listed Tasks</h2>
 
-  <div class="form-group">
-    <label>Title</label>
-    <input type="text" name="task[title]" class="form-control" id="task-title" value="<%=selectedTask.title%>">
-  </div>
 
-  <div class="form-group">
-    <label>Description</label>
-    <input type="text" name="task[description]" class="form-control" id="task-description" rows="3" value="<%=selectedTask.description%>">
-  </div>
 
-  <div class="form-group">
-    <label>Date</label>
-    <input type="text" name="task[date]" class="form-control" id="task-date" value="<%=selectedTask.date%>">
-  </div>
+    <form class="newtask" id="editEvent" action="#" method = "post">
 
-  <div class="form-group">
-    <label>Time</label>
-    <input type="text" name="task[time]" class="form-control" id="task-time"  value="<%=selectedTask.time%>">
-  </div>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="task[title]" class="form-control" id="task-title" value="<%=selectedTask.title%>">
+      </div>
 
-  <div class="form-group">
-    <label>Location</label>
-    <input type="text" name="task[location]" class="form-control" id="task-location" value="<%=selectedTask.location%>">
-  </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" name="task[description]" class="form-control" id="task-description" rows="3" value="<%=selectedTask.description%>">
+      </div>
 
-  <button type="submit" class="btn btn-primary">Amend</button>
-</form>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="text" name="task[date]" class="form-control" id="task-date" value="<%=selectedTask.date%>">
+      </div>
+
+      <div class="form-group">
+        <label>Time</label>
+        <input type="text" name="task[time]" class="form-control" id="task-time"  value="<%=selectedTask.time%>">
+      </div>
+
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" name="task[location]" class="form-control" id="task-location" value="<%=selectedTask.location%>">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Amend</button>
+    </form>
+
+  </body>
+</html>

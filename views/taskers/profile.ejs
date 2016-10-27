@@ -7,7 +7,7 @@
   </head>
   <body>
 
-    <button type="button" id="logoutbtn" class="btn btn-default btn-sm"><a href="/taskers/logout">Logout</a>
+    <button type="button" id="logoutbtn" class="btn btn-default btn-sm"><a href="/logout">Logout</a>
     <span class="glyphicon glyphicon-log-out"></span>
     </button>
 
@@ -28,7 +28,7 @@
       <tbody>
 
         <% taskList.forEach(function(task) { %>
-          <%var date = new Date(task.date); 
+          <%var date = new Date(task.date);
               var day = date.getDate();
               var mth = date.getMonth()+1
               var yr = date.getFullYear()

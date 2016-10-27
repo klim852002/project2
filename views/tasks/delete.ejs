@@ -1,32 +1,47 @@
-<h2>Hi, <%= deleteTask.tasker %> </h2>
-<h2>Delete Task</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
 
-<form id="deleteTask" action="/profile/<%=deleteTask.id%>?_method=DELETE" method = "POST">
+    <button type="button" id="logoutbtn" class="btn btn-default btn-sm"><a href="/logout">Logout</a>
+    <span class="glyphicon glyphicon-log-out"></span>
+    </button>
 
-  <div class="form-group">
-    <label>Title</label>
-    <input type="text" name="task[title]" class="form-control" id="task-title" value="<%=deleteTask.title%>">
-  </div>
+    <h2>Hi, <%= deleteTask.tasker %> </h2>
+    <h2>Delete Task</h2>
 
-  <div class="form-group">
-    <label>Description</label>
-    <input type="text" name="task[description]" class="form-control" id="task-description" rows="3" value="<%=deleteTask.description%>">
-  </div>
+    <form id="deleteTask" action="/profile/<%=deleteTask.id%>?_method=DELETE" method = "POST">
 
-  <div class="form-group">
-    <label>Date</label>
-    <input type="text" name="task[date]" class="form-control" id="task-date" value="<%=deleteTask.date%>">
-  </div>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="task[title]" class="form-control" id="task-title" value="<%=deleteTask.title%>">
+      </div>
 
-  <div class="form-group">
-    <label>Time</label>
-    <input type="text" name="task[time]" class="form-control" id="task-time"  value="<%=deleteTask.time%>">
-  </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" name="task[description]" class="form-control" id="task-description" rows="3" value="<%=deleteTask.description%>">
+      </div>
 
-  <div class="form-group">
-    <label>Location</label>
-    <input type="text" name="task[location]" class="form-control" id="task-location" value="<%=deleteTask.location%>">
-  </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="text" name="task[date]" class="form-control" id="task-date" value="<%=deleteTask.date%>">
+      </div>
 
-  <button type="submit" class="btn btn-primary">Delete</button>
-</form>
+      <div class="form-group">
+        <label>Time</label>
+        <input type="text" name="task[time]" class="form-control" id="task-time"  value="<%=deleteTask.time%>">
+      </div>
+
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" name="task[location]" class="form-control" id="task-location" value="<%=deleteTask.location%>">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Delete</button>
+    </form>
+
+  </body>
+</html>

@@ -67,6 +67,12 @@ app.get('/', function (req, res) {
 app.get('/about', function (req, res) {
   res.render('aboutus')
 })
+
+app.get('/logout', function (req, res) {
+  req.logout()
+  res.redirect('/')
+})
+
 app.use('/taskers', taskersRoutes)
 app.use('/helpers', helpersRoutes)
 app.use('/tasks', tasksRoutes)

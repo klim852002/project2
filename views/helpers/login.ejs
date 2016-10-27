@@ -1,21 +1,26 @@
-helpers- login page
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h2>Helpers Login</h2>
 
-<form class="helper-login" action="/helpers/login" method = "post">
+    <form class="helper-login" action="/helpers/login" method = "post">
 
-  <div class="form-group">
-    <label class="sr-only">Email address</label>
-    <input type="email" name="helper[local][email]" class="form-control" id="helper-email" placeholder="Email">
-  </div>
+      <div class="form-group">
+        <label class="sr-only">Email address</label>
+        <input type="email" name="helper[local][email]" class="form-control" id="helper-email" placeholder="Email">
+      </div>
 
-  <div class="form-group">
-    <label class="sr-only">Password</label>
-    <input type="password" name="helper[local][password]" class="form-control" id="helper-password" placeholder="Password">
-  </div>
+      <div class="form-group">
+        <label class="sr-only">Password</label>
+        <input type="password" name="helper[local][password]" class="form-control" id="helper-password" placeholder="Password">
+      </div>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Remember me
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
-</form>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+
+  </body>
+</html>
