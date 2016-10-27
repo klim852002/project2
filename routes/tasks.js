@@ -1,10 +1,31 @@
 var express = require('express')
 var router = express.Router()
+var passport = require('passport')
 
 var Task = require('../models/task')
 var Tasker = require('../models/tasker')
 var Helper = require('../models/helper')
 
+
+function authCheck (req, res, next) {
+  // if req.isAuthenticated is false, then let it be
+
+  // if it's true, redirect back to profile
+  if (req.isAuthenticated()) {
+    req.flash('signupMessage', 'You have logged in')
+    return res.redirect('/profile')
+  } else {
+    return next()
+  }
+}
+
+function isLoggedIn (req, res, next) {
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated())
+    return next()
+  // otherwise redirect them to the home page
+  res.redirect('/')
+}
 // get request to render form for new task
 router.get('/newtask', function (req, res) {
   // res.send(req.user)
@@ -43,7 +64,7 @@ router.get('/listings', function (req, res) {
 })
 
 router.get('/helperlist', function (req, res) {
-  Task.find({}, function (err, allTasks) {
+  Task.find({message: null}, function (err, allTasks) {
     console.log(allTasks)
     res.render('tasks/helperlist', {
       allTasks: allTasks
@@ -59,7 +80,7 @@ router.get('/:id/message', function (req, res) {
   })
 })
 
-router.post('/:id/message', function (req, res) {
+router.post('/:id/message', isLoggedIn, function (req, res) {
   Task.findOne ({_id: req.params.id}, function (err, leaveMsg)
   {
     if (err) {
