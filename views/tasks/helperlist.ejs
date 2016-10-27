@@ -12,8 +12,8 @@
 
     <h1>Open Tasklist</h1>
 
-    <table class="table table-striped">
-      <thead>
+    <table class="table">
+      <thead class="thead-default">
         <tr>
           <th>Title</th>
           <th>Description</th>
@@ -38,11 +38,12 @@
           <td><%= task.time %></td>
           <td>  <%= task.location %></td>
           <td><a href="<%=task._id%>/message" class="btn btn-info" role="button" aria-pressed="true">Drop a message!</a></td>
-
         </tr>
       <% }) %>
       </ul>
-
-
+    </tbody>
+  </table>
+          <button type="button" class="btn btn-secondary btn-lg"><a href="/helpers/profile">Back to profile</button>
   </body>
+
 </html>
