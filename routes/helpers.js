@@ -1,6 +1,8 @@
 var express = require('express')
 var router = express.Router()
 var passport = require('passport')
+var moment = require('moment');
+var fomatted_date = moment().format('YYYY-DD-MM');
 
 var Helper = require('../models/helper')
 var Task = require('../models/task')
@@ -55,7 +57,6 @@ router.route('/login')
 router.get('/profile', function (req, res) {
   Task.find({helper: req.user.id}).populate('tasker').exec(function (err, taskList) {
     if (err) console.log(err)
-
     res.render('helpers/profile', {
       taskList: taskList,
       user: req.user.local.name

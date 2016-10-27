@@ -8,6 +8,7 @@ var session = require('express-session')
 var passport = require('passport')
 var MongoStore = require('connect-mongo')(session)
 var methodOverride = require('method-override')
+var moment = require('moment');
 
 var dotenv = require('dotenv')
 

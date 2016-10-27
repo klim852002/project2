@@ -27,12 +27,15 @@
       </thead>
       <tbody>
 
-        <%# var showDate = task.date.slice(10, 5)%>
-
         <% taskList.forEach(function(task) { %>
+          <%var date = new Date(task.date); 
+              var day = date.getDate();
+              var mth = date.getMonth()+1
+              var yr = date.getFullYear()
+              %>
               <tr>
                 <td><%= task.title %></td>
-                <td><%= task.date%></td>
+                <td><%=day+'/'+mth+ '/'+yr%></td>
                 <td><%= task.time%></td>
                 <td><%= task.message%></td>
                 <td>

@@ -1,6 +1,8 @@
 var express = require('express')
 var router = express.Router()
 var passport = require('passport')
+var moment = require('moment');
+var fomatted_date = moment().format('YYYY-DD-MM');
 
 var Tasker = require('../models/tasker')
 var Task = require('../models/task')
@@ -63,14 +65,7 @@ router.get('/profile', isLoggedIn, function (req, res) {
       user: req.user.local.name
       // date: req.body.local.task.date.slice(10, 5)
     })
-          // console.log(taskList)
   })
-  // .populate()
-  // this return in json format
-  // res.send(req.user)
-  // need to search user by id
-  // Tasker.find({}, req.body._id)
-  // res.render('taskers/profile', { message: req.flash('loginMessage') })
 })
 
 
