@@ -35,7 +35,11 @@ Helpers profile page
                 <td><%= task.date%></td>
                 <td><%= task.time%></td>
                 <td><%= task.message %></td>
-                <td><%= task.tasker %></td>
+                <td>
+                <% if(task.tasker) { %>
+                  <%= task.tasker.local.name %>
+                <% } else { %>
+                <% } %></td>
               </tr>
               <% })  %>
       </tbody>

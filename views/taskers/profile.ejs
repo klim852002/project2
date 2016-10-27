@@ -35,11 +35,11 @@
                 <td><%= task.date%></td>
                 <td><%= task.time%></td>
                 <td><%= task.message%></td>
-                  <td>
+                <td>
                 <% if(task.helper) { %>
-                  <%= task.helper.local.name %></td>
+                  <%= task.helper.local.name %>
                 <% } else { %>
-                <% } %>
+                <% } %></td>
                 <td><a href="profile/<%=task._id%>/edit" class="btn btn-info" role="button" aria-pressed="true">Amend</a></td>
 
                 <td><form method="post" action="profile/<%=task._id%>?_method=DELETE">

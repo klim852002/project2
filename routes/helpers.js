@@ -53,7 +53,9 @@ router.route('/login')
 // local passport strategy for authenticating login
 
 router.get('/profile', function (req, res) {
-  Task.find({'helper': req.user}, function (err, taskList) {
+  Task.find({helper: req.user.id}).populate('tasker').exec(function (err, taskList) {
+    if (err) console.log(err)
+
     res.render('helpers/profile', {
       taskList: taskList,
       user: req.user.local.name
