@@ -5,7 +5,12 @@
     <title>message</title>
   </head>
   <body>
-
+    <% if(message.length > 0) { %>
+      <h3>Flash Found</h3>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% } %>
     <button type="button" id="logoutbtn" class="btn btn-default btn-sm"><a href="/logout">Logout</a>
     <span class="glyphicon glyphicon-log-out"></span>
     </button>

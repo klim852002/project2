@@ -71,8 +71,9 @@ router.get('/profile', isLoggedIn, function (req, res) {
 
 
 // get request for a submitted form
-router.get('/profile/:id/edit', function (req, res) {
-  Task.findOne({_id: req.params.id}, function(err, selectedTask) {
+router.get('/profile/:id/edit', isLoggedIn, function (req, res) {
+  Task.findOne({_id: req.params.id}).populate('tasker').exec(function (err, selectedTask) {
+    if (err) console.log(err)
     res.render('tasks/edit', {
       selectedTask: selectedTask
     })
@@ -80,7 +81,7 @@ router.get('/profile/:id/edit', function (req, res) {
 })
 
 // post request for a amended task
-router.post('/profile/:id/edit', function (req, res) {
+router.post('/profile/:id/edit', isLoggedIn, function (req, res) {
   // res.send('test')
   Task.findOne({_id: req.params.id}, function (err, amendTask) {
     if (err) {
@@ -98,7 +99,7 @@ router.post('/profile/:id/edit', function (req, res) {
   })
 })
 
-router.get('/profile/:id', function (req, res) {
+router.get('/profile/:id', isLoggedIn, function (req, res) {
   Task.findOne({_id: req.params.id}, function(err, deleteTask) {
     res.render('tasks/delete', {
       deleteTask: deleteTask
@@ -106,7 +107,7 @@ router.get('/profile/:id', function (req, res) {
   })
 })
 // delete request to remove task
-router.delete('/profile/:id', function (req, res){
+router.delete('/profile/:id', isLoggedIn, function (req, res){
   Task.findOneAndRemove({_id: req.params.id}, function (err, deleteTask){
     if (err) {
       res.render('tasks/edit')

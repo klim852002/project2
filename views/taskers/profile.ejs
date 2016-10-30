@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Taskers profile page</title>
+    <title>Tasker profile page</title>
     <link rel="stylesheet" href="/public/css/style.css">
   </head>
   <body>
@@ -42,8 +42,9 @@
                 <% if(task.helper) { %>
                   <%= task.helper.local.name %>
                 <% } else { %>
-                <% } %></td>
-                <td><a href="profile/<%=task._id%>/edit" class="btn btn-info" role="button" aria-pressed="true">Amend</a></td>
+                <% } %>
+                </td>
+                <td><a href="profile/<%=task._id%>/edit" class="btn btn-info" role="button" aria-pressed="true">View/Amend</a></td>
 
                 <td><form method="post" action="profile/<%=task._id%>?_method=DELETE">
                 <button class="btn btn-outline-warning" name="submit" type="submit">Delete</button></td></form>

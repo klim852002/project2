@@ -1,8 +1,6 @@
 var express = require('express')
 var router = express.Router()
 var passport = require('passport')
-var moment = require('moment');
-var fomatted_date = moment().format('YYYY-DD-MM');
 
 var Task = require('../models/task')
 var Tasker = require('../models/tasker')
@@ -26,15 +24,18 @@ function isLoggedIn (req, res, next) {
   if (req.isAuthenticated())
     return next()
   // otherwise redirect them to the home page
+  req.flash('remindLoginMessage', 'Please login to access the page')
   res.redirect('/')
+  message: req.flash('remindLoginMessage')
 }
+
 // get request to render form for new task
-router.get('/newtask', function (req, res) {
+router.get('/newtask', isLoggedIn, function (req, res) {
   // res.send(req.user)
   res.render('tasks/newtask')
 })
 // post request to create new task
-router.post('/newtask', function (req, res) {
+router.post('/newtask', isLoggedIn, function (req, res) {
   // Task.create(req.body.task, function
   console.log(req.user)
   var newTask = new Task({
@@ -65,16 +66,22 @@ router.get('/listings', function (req, res) {
   })
 })
 
-router.get('/helperlist', function (req, res) {
+
+
+router.get('/helperlist', isLoggedIn, function (req, res) {
+  // if (!isLoggedIn) {
+  //   rmessage: req.flash('remindLoginMessage'),
+  // } else {
   Task.find({message: null}, function (err, allTasks) {
     console.log(allTasks)
     res.render('tasks/helperlist', {
+      message: req.flash('remindLoginMessage'),
       allTasks: allTasks
     })
   })
 })
 
-router.get('/:id/message', function (req, res) {
+router.get('/:id/message', isLoggedIn, function (req, res) {
   Task.findOne({_id: req.params.id}, function(err, viewTask) {
       res.render('tasks/message', {
           viewTask: viewTask
