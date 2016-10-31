@@ -40,7 +40,8 @@ module.exports = function (passport) {
         } else {
           Tasker.create(req.body.tasker, function (err, newTasker) {
             if (err) throw err
-            return next(null, newTasker)
+            // console.log(err)
+            return next(null, newTasker) 
           })
         }
       })

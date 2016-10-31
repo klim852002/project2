@@ -9,7 +9,6 @@ var Helper = require('../models/helper')
 
 function authCheck(req, res, next) {
   // if req.isAuthenticated is false, then let it be
-
   // if it's true, redirect back to profile
   if (req.isAuthenticated()) {
     req.flash('signupMessage', 'You have logged in')
@@ -21,14 +20,14 @@ function authCheck(req, res, next) {
 
 function isLoggedIn(req, res, next) {
   // if user is authenticated in the session, carry on
-  if (req.isAuthenticated())
+  if (req.isAuthenticated()) {
     return next()
       // otherwise redirect them to the home page
+    } else {
   req.flash('remindLoginMessage', 'Please login to access the page')
   res.redirect('/')
-  message: req.flash('remindLoginMessage')
+  }
 }
-
 // get request to render form for new task
 router.get('/newtask', isLoggedIn, function(req, res) {
     // res.send(req.user)
@@ -67,20 +66,19 @@ router.get('/listings', function(req, res) {
 })
 // get request for helperlist  (open tasks that are viewed by logged in helper)
 router.get('/helperlist', isLoggedIn, function(req, res) {
-  if (!isLoggedIn) {
-    message: req.flash('remindLoginMessage')
-  }
-  else {
+  // if (!isLoggedIn) {
+  //   message: req.flash('remindLoginMessage')
+  // }
+  // else {
     Task.find({
       message: null
     }, function(err, allTasks) {
       console.log(allTasks)
       res.render('tasks/helperlist', {
-        message: req.flash('remindLoginMessage'),
         allTasks: allTasks
       })
     })
-  }
+  // }
 })
 // get request to view individual task
 router.get('/:id/message', isLoggedIn, function(req, res) {

@@ -11,7 +11,7 @@ function authCheck(req, res, next) {
   // if it's true, redirect back to profile
   if (req.isAuthenticated()) {
     req.flash('signupMessage', 'You have logged in')
-    return res.redirect('/profile')
+    return res.redirect('/helpers/profile')
   } else {
     return next()
   }
@@ -66,6 +66,8 @@ router.get('/profile', isLoggedIn, function(req, res) {
       })
     })
   })
+
+
   // , { message: req.flash('loginMessage') }
 
 router.get('/logout', function(req, res) {

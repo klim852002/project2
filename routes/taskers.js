@@ -6,13 +6,13 @@ var fomatted_date = moment().format('YYYY-DD-MM');
 
 var Tasker = require('../models/tasker')
 var Task = require('../models/task')
+
 function authCheck (req, res, next) {
   // if req.isAuthenticated is false, then let it be
-
   // if it's true, redirect back to profile
   if (req.isAuthenticated()) {
     req.flash('signupMessage', 'You have logged in')
-    return res.redirect('/profile')
+    return res.redirect('/taskers/profile')
   } else {
     return next()
   }
@@ -45,7 +45,7 @@ router.route('/signup')
 
 // local passport strategy for authenticating login
 router.route('/login')
-      .get(function (req, res) {
+      .get(authCheck, function (req, res) {
         res.render('taskers/login', { message: req.flash('loginMessage') })
       })
       .post(passport.authenticate('local-login', {
@@ -63,7 +63,6 @@ router.get('/profile', isLoggedIn, function (req, res) {
     res.render('taskers/profile', {
       taskList: taskList,
       user: req.user.local.name
-      // date: req.body.local.task.date.slice(10, 5)
     })
   })
 })
